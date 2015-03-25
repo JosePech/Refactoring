@@ -34,10 +34,5 @@ public class RightOpenedInterval extends Interval{
         return (interval.includes(this.getMinimum()) )
                 && (interval.includes(this.getMaximum()) || this.getMaximum() == interval.getMaximum() );
     }
-    
-    protected boolean includes(UnopenedInterval interval){
-        return (interval.includes(this.getMinimum()) )
-                && interval.includes(this.getMaximum());
-    }  
 
 }

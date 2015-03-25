@@ -29,10 +29,6 @@ public class BothOpenedInterval extends Interval{
         return (interval.includes(this.getMinimum()) )
                 && (interval.includes(this.getMaximum()) || this.getMaximum() == interval.getMaximum() );
     }
-    
-    protected boolean includes(UnopenedInterval interval){
-        return interval.includes(this.getMinimum()) && interval.includes(this.getMaximum());
-    }
 
     @Override
     public Opening getOpening() {

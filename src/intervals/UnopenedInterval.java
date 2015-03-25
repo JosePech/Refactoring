@@ -36,12 +36,6 @@ public class UnopenedInterval extends Interval{
     protected boolean includes(RightOpenedInterval interval) {
         return (interval.includes(this.getMinimum()) )
                 && interval.includes(this.getMaximum());
-    }
-
-    
-    protected boolean includes(UnopenedInterval interval) {
-        return (interval.includes(this.getMinimum()) )
-                && interval.includes(this.getMaximum());
-    }    
+    } 
 
 }
