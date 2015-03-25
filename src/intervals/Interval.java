@@ -27,23 +27,15 @@ public abstract class Interval {
 
     public abstract boolean includes(double value);
 
-    public boolean includes(Interval interval) {  
-        switch (interval.getOpening()) {
-        case BOTH_OPENED:
-            return (this.includes(interval.getMinimum()) || this.getMinimum() == interval.getMinimum() )
-                    && (this.includes(interval.getMaximum()) || this.getMaximum() == interval.getMaximum() );
-        case LEFT_OPENED:
-            return (this.includes(interval.getMinimum()) || this.getMinimum() == interval.getMinimum() )
-                    && (this.includes(interval.getMaximum()) );
-        case RIGHT_OPENED:
-            return (this.includes(interval.getMinimum()) )
-                    && (this.includes(interval.getMaximum()) || this.getMaximum() == interval.getMaximum() );
-        case UNOPENED:
-            return this.includes(interval.getMinimum()) && this.includes(interval.getMaximum());
-        default:
-            return false;
-        }        
-    }
+    public abstract boolean includes(Interval interval);
+    
+    protected abstract boolean includes(BothOpenedInterval interval);
+    
+    protected abstract boolean includes(LeftOpenedInterval interval);
+    
+    protected abstract boolean includes(RightOpenedInterval interval);
+    
+    protected abstract boolean includes(UnopenedInterval interval);
 
     public boolean intersectsWith(Interval interval) {
         return false;     
