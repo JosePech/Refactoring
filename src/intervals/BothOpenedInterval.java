@@ -6,6 +6,10 @@ public class BothOpenedInterval extends Interval{
         this.setMinimum(minimum);
         this.setMaximum(maximum);
     }
+    
+    public boolean includes(double value) {
+        return getMinimum() < value && value < getMaximum();
+    }
 
     @Override
     public Opening getOpening() {

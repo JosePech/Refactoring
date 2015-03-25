@@ -25,20 +25,7 @@ public abstract class Interval {
         return (minimum + maximum) / 2d;
     }
 
-    public boolean includes(double value) {
-        switch (this.getOpening()) {
-        case BOTH_OPENED:
-            return minimum < value && value < maximum;
-        case LEFT_OPENED:
-            return minimum < value && value <= maximum;
-        case RIGHT_OPENED:
-            return minimum <= value && value < maximum;
-        case UNOPENED:
-            return minimum <= value && value <= maximum;
-        default:
-            return false;
-        }
-    }
+    public abstract boolean includes(double value);
 
     public boolean includes(Interval interval) {  
         switch (interval.getOpening()) {
