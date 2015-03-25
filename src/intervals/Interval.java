@@ -22,7 +22,7 @@ public abstract class Interval {
     }
 
     public double midPoint() {
-        return (minimum + maximum) / 2d;
+        return (getMinimum() + getMaximum()) / 2d;
     }
 
     public abstract boolean includes(double value);
@@ -67,14 +67,12 @@ public abstract class Interval {
     public abstract Opening getOpening();
 
     @Override
-    public String toString() {
-        // TODO
-        return null;
-    }
-
-    @Override
     public boolean equals(Object object) {
-        // TODO
-        return false;
+        assert Interval.class.isInstance(object);
+        Interval cast = (Interval) object;        
+        boolean isType = cast.getOpening() == this.getOpening();
+        boolean isMaximum = cast.getMaximum() == this.getMaximum();
+        boolean isMinimum = this.getMinimum() == cast.getMinimum();
+        return isType && isMaximum && isMinimum;
     }
 }
