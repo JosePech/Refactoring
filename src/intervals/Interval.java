@@ -1,12 +1,10 @@
 package intervals;
 
-public class Interval {
+public abstract class Interval {
 
     private double minimum;
 
     private double maximum;
-
-    private Opening opening;
     
     public static Interval create(double minimum, double maximum, Opening opening) {
         switch (opening) {
@@ -21,12 +19,6 @@ public class Interval {
         default:
             return null;
         }
-    }
-
-    private Interval(double minimum, double maximum, Opening opening) {
-        this.setMinimum(minimum);
-        this.setMaximum(maximum);
-        this.setOpening(opening);
     }
 
     public double midPoint() {
@@ -93,13 +85,7 @@ public class Interval {
         this.maximum = maximum;
     }
 
-    public Opening getOpening() {
-        return opening;
-    }
-
-    public void setOpening(Opening opening) {
-        this.opening = opening;
-    }
+    public abstract Opening getOpening();
 
     @Override
     public String toString() {
