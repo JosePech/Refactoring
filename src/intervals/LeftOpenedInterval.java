@@ -3,16 +3,16 @@ package intervals;
 public class LeftOpenedInterval extends Interval{
     
     public LeftOpenedInterval(double minimum, double maximum) {
-        this.setMinimum(minimum);
-        this.setMaximum(maximum);
+        this.minimum = Point.create(minimum, PointType.OPENED);
+        this.maximum = Point.create(maximum, PointType.CLOSED);
     }
     
     public boolean includes(double value) {
         return getMinimum() < value && value <= getMaximum();
     }
     
-    public boolean includes(Interval interval) {  
-        return interval.includes(this);     
+    public boolean includes(Interval interval) {
+        return this.includes(interval.minimum) && this.includes(interval.maximum);
     }
 
     @Override
@@ -21,18 +21,15 @@ public class LeftOpenedInterval extends Interval{
     }
 
     protected boolean includes(BothOpenedInterval interval){
-        return (interval.includes(this.getMinimum()) || this.getMinimum() == interval.getMinimum() )
-                && (interval.includes(this.getMaximum()));
+        return false;
     }
     
     protected boolean includes(LeftOpenedInterval interval){
-        return (interval.includes(this.getMinimum()) || this.getMinimum() == interval.getMinimum() )
-                && (interval.includes(this.getMaximum()) );
+        return false;
     }
     
     protected boolean includes(RightOpenedInterval interval){
-        return (interval.includes(this.getMinimum()) )
-                && interval.includes(this.getMaximum());
+        return false;
     }
 
 }
