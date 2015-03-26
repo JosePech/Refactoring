@@ -2,9 +2,9 @@ package intervals;
 
 public abstract class Interval {
 
-    private double minimum;
+    protected Point minimum;
 
-    private double maximum;
+    protected Point maximum;
 
     public static Interval create(double minimum, double maximum, Opening opening) {
         switch (opening) {
@@ -25,7 +25,12 @@ public abstract class Interval {
         return (getMinimum() + getMaximum()) / 2d;
     }
 
+    //Este metodo se conserva porque usar la nueva clase Point implica modificar las pruebas.
     public abstract boolean includes(double value);
+    
+    protected boolean includes(Point p){        
+        return !minimum.isBiggerThan(p) && !maximum.isSmallerThan(p);
+    }
 
     public abstract boolean includes(Interval interval);
 
@@ -49,21 +54,21 @@ public abstract class Interval {
     }
 
     public double getMinimum() {
-        return minimum;
+        return minimum.getValue();
     }
 
     public void setMinimum(double minimum) {
-        assert minimum < maximum;
-        this.minimum = minimum;
+        assert maximum != null && minimum < maximum.getValue();
+        this.minimum.setValue(minimum);
     }
 
     public double getMaximum() {
-        return maximum;
+        return maximum.getValue();
     }
 
     public void setMaximum(double maximum) {
-        assert maximum > minimum;
-        this.maximum = maximum;
+        assert minimum != null && maximum > minimum.getValue();
+        this.maximum.setValue(maximum);
     }
 
     public abstract Opening getOpening();
