@@ -32,7 +32,9 @@ public abstract class Interval {
         return !minimum.isBiggerThan(p) && !maximum.isSmallerThan(p);
     }
 
-    public abstract boolean includes(Interval interval);
+    public boolean includes(Interval interval) {
+        return this.includes(interval.minimum) && this.includes(interval.maximum);
+    }
 
     public boolean intersectsWith(Interval interval) {
         return false;
