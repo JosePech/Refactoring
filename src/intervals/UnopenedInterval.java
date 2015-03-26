@@ -20,19 +20,4 @@ public class UnopenedInterval extends Interval{
         return Opening.UNOPENED;
     }
 
-    
-    protected boolean includes(BothOpenedInterval interval) {
-        return false;
-    }
-
-    
-    protected boolean includes(LeftOpenedInterval interval) {
-        return false;
-    }
-
-    
-    protected boolean includes(RightOpenedInterval interval) {
-        return false;
-    } 
-
 }

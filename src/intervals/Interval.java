@@ -34,16 +34,6 @@ public abstract class Interval {
 
     public abstract boolean includes(Interval interval);
 
-    protected abstract boolean includes(BothOpenedInterval interval);
-
-    protected abstract boolean includes(LeftOpenedInterval interval);
-
-    protected abstract boolean includes(RightOpenedInterval interval);
-
-    protected boolean includes(UnopenedInterval interval){
-        return interval.includes(this.getMinimum()) && interval.includes(this.getMaximum());
-    }
-
     public boolean intersectsWith(Interval interval) {
         return false;
     }

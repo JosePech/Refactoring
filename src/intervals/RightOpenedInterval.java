@@ -19,17 +19,5 @@ public class RightOpenedInterval extends Interval{
     public Opening getOpening() {
         return Opening.RIGHT_OPENED;
     }
-
-    protected boolean includes(BothOpenedInterval interval){
-        return false;
-    }
     
-    protected boolean includes(LeftOpenedInterval interval){        
-        return false;
-    }
-    
-    protected boolean includes(RightOpenedInterval interval){
-        return false;
-    }
-
 }

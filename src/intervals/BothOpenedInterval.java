@@ -15,18 +15,6 @@ public class BothOpenedInterval extends Interval{
         return this.includes(interval.minimum) && this.includes(interval.maximum);
     }
     
-    protected boolean includes(BothOpenedInterval interval){
-        return false;
-    }
-    
-    protected boolean includes(LeftOpenedInterval interval){
-        return false;
-    }
-    
-    protected boolean includes(RightOpenedInterval interval){
-        return false;
-    }
-
     @Override
     public Opening getOpening() {
         return Opening.BOTH_OPENED;
