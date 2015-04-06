@@ -4,8 +4,10 @@ public abstract class Interval {
 
     protected Point minimum;
 
-    protected Point maximum;
-
+    protected Point maximum;   
+    
+    //Se conserva solo para no modificar el test. 
+    //La nueva clase punto deberia definir la creacion del intervalo.
     public static Interval create(double minimum, double maximum, Opening opening) {
         switch (opening) {
         case BOTH_OPENED:
@@ -20,6 +22,25 @@ public abstract class Interval {
             return null;
         }
     }
+    
+    public static Interval create(Point minimum, Point maximum) {
+        if(BothOpenedInterval.acceptsParameters(minimum.getType(), maximum.getType()))
+            return new BothOpenedInterval(minimum.getValue(), maximum.getValue());
+        
+        if(LeftOpenedInterval.acceptsParameters(minimum.getType(), maximum.getType()))
+            return new LeftOpenedInterval(minimum.getValue(), maximum.getValue());
+        
+        if(RightOpenedInterval.acceptsParameters(minimum.getType(), maximum.getType()))
+            return new RightOpenedInterval(minimum.getValue(), maximum.getValue());
+        
+        if(UnopenedInterval.acceptsParameters(minimum.getType(), maximum.getType()))
+            return new UnopenedInterval(minimum.getValue(), maximum.getValue());
+        
+        return null;
+        
+    }
+    
+    public abstract Opening getOpening();
 
     public double midPoint() {
         return (getMinimum() + getMaximum()) / 2d;
@@ -28,21 +49,26 @@ public abstract class Interval {
     //Este metodo se conserva porque usar la nueva clase Point implica modificar las pruebas.
     public abstract boolean includes(double value);
     
-    protected boolean includes(Point p){        
-        return !minimum.isBiggerThan(p) && !maximum.isSmallerThan(p);
+    protected boolean includesMinimum(Point p){ 
+        return !minimum.isBiggerThan(p) && p.intersectsWith(maximum);
+    }
+    
+    protected boolean includesMaximum(Point p){
+        return minimum.intersectsWith(p) && !maximum.isSmallerThan(p);
     }
 
     public boolean includes(Interval interval) {
-        return this.includes(interval.minimum) && this.includes(interval.maximum);
+        return this.includesMinimum(interval.minimum) && this.includesMaximum(interval.maximum);
     }
 
     public boolean intersectsWith(Interval interval) {
-        return false;
+        return this.includesMinimum(interval.minimum) || this.includesMaximum(interval.maximum);
     }
 
     public Interval intersection(Interval interval) {
-        // TODO
-        return null;
+        Point newMinimum = this.minimum.isBiggerThan(interval.minimum) ? minimum : interval.minimum;
+        Point newMaximum = this.maximum.isSmallerThan(interval.maximum) ? maximum : interval.maximum;        
+        return Interval.create(newMinimum, newMaximum);
     }
 
     public double getMinimum() {
@@ -62,8 +88,6 @@ public abstract class Interval {
         assert minimum != null && maximum > minimum.getValue();
         this.maximum.setValue(maximum);
     }
-
-    public abstract Opening getOpening();
 
     @Override
     public boolean equals(Object object) {

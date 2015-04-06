@@ -16,4 +16,8 @@ public class LeftOpenedInterval extends Interval{
         return Opening.LEFT_OPENED;
     }
 
+    public static boolean acceptsParameters(PointType min, PointType max) {
+        return min == PointType.OPENED && max == PointType.CLOSED;
+    }
+
 }

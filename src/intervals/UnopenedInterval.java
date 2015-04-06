@@ -16,4 +16,8 @@ public class UnopenedInterval extends Interval{
         return Opening.UNOPENED;
     }
 
+    public static boolean acceptsParameters(PointType min, PointType max) {
+        return min == PointType.CLOSED && max == PointType.CLOSED;
+    }
+
 }
