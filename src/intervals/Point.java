@@ -4,6 +4,8 @@ public abstract class Point {
     
     protected double value;
     
+    private PointType type;
+    
     public static Point create(double value, PointType type){
         if(type == PointType.OPENED)
             return new OpenedPoint(value);
@@ -15,6 +17,8 @@ public abstract class Point {
     
     public abstract boolean isSmallerThan(Point p);
     
+    public abstract boolean intersectsWith(Point p);
+    
     protected abstract boolean isBiggerThan(OpenedPoint p);
     
     protected abstract boolean isBiggerThan(ClosedPoint p);
@@ -22,6 +26,10 @@ public abstract class Point {
     protected abstract boolean isSmallerThan(OpenedPoint p);
     
     protected abstract boolean isSmallerThan(ClosedPoint p);
+    
+    protected abstract boolean intersectsWith(OpenedPoint p);
+        
+    protected abstract boolean intersectsWith(ClosedPoint p);
     
     public double getValue(){
         return this.value;
@@ -31,4 +39,11 @@ public abstract class Point {
         this.value = value;
     }
 
+    public PointType getType() {
+        return type;
+    }
+
+    public void setType(PointType type) {
+        this.type = type;
+    }
 }
