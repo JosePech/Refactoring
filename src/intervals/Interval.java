@@ -75,18 +75,8 @@ public abstract class Interval {
         return minimum.getValue();
     }
 
-    public void setMinimum(double minimum) {
-        assert maximum != null && minimum < maximum.getValue();
-        this.minimum.setValue(minimum);
-    }
-
     public double getMaximum() {
         return maximum.getValue();
-    }
-
-    public void setMaximum(double maximum) {
-        assert minimum != null && maximum > minimum.getValue();
-        this.maximum.setValue(maximum);
     }
 
     @Override
